@@ -1,3 +1,8 @@
 # Development
-docker build . -t teamcity
-docker run --rm -it -v $(pwd):/app --name teamcity teamcity sh
+Copy `credentials_example.py` to `credentials.py` and populate the appropriate values.
+
+## Develop in docker
+```
+docker build . -t scaffold
+docker run --rm -it -v $(pwd):/app --name scaffold scaffold sh
+```
