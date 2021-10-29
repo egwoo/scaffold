@@ -6,3 +6,7 @@ Copy `credentials_example.py` to `credentials.py` and populate the appropriate v
 docker build . -t scaffold
 docker run --rm -it -v $(pwd):/app --name scaffold scaffold sh
 ```
+### In Docker (for now)
+```
+python3 octopus.py
+```
