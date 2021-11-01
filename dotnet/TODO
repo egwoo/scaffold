@@ -1,7 +1,0 @@
-Review template/api/infra/helm-valuesvalues.*.yaml.template
-Couple weird things
-- intg / staging
-- Looks like there's some IAM setup that needs to be done as well
-
-Have not added dependency between projects yet
-Have not added healthcheck
