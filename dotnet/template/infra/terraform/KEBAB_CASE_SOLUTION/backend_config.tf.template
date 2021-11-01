@@ -1,0 +1,18 @@
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+    }
+    template = {
+      source = "hashicorp/template"
+    }
+  }
+  required_version = "~> 0.14"
+  backend "remote" {
+    hostname     = "app.terraform.io"
+    organization = "shipstation-devops"
+    workspaces {
+      prefix = "{{KEBAB_CASE_SOLUTION}}-"
+    }
+  }
+}

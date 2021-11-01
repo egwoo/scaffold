@@ -1,0 +1,27 @@
+ingress:
+  annotations:
+    kubernetes.io/ingress.class: nginx-sslocal
+
+  hosts:
+    - {{KEBAB_CASE_SOLUTION}}-prod.sslocal.com
+
+resources:
+  memory:
+    request: "512Mi"
+    limit: "1024Mi"
+  cpu:
+    request: "0.5"
+    limit: "1"
+
+autoscaling:
+  enabled: true
+  cpu: 70
+
+environment:
+  DEPLOY_ENV: "prod"
+  ASPNETCORE_ENVIRONMENT: "Production"
+  NEW_RELIC_APP_NAME: "{{KEBAB_CASE_PROJECT}}-prod"
+  SENTRY__RELEASE: "#{SENTRY_RELEASE}"
+
+#podAnnotations:
+#  iam.amazonaws.com/role: arn:aws:iam::813448775391:role/{{KEBAB_CASE_SOLUTION}}-kube2iam-prod

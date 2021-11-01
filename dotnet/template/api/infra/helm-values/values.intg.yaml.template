@@ -1,0 +1,16 @@
+ingress:
+  annotations:
+    kubernetes.io/ingress.class: nginx-kubedev-sslocal
+
+  hosts:
+    - {{KEBAB_CASE_SOLUTION}}-intg.kubedev.sslocal.com
+
+environment:
+  DEPLOY_ENV: "intg"
+  ASPNETCORE_ENVIRONMENT: "Staging"
+  NEW_RELIC_APP_NAME: "{{KEBAB_CASE_PROJECT}}-intg"
+  SENTRY__RELEASE: "#{SENTRY_RELEASE}"
+
+#not totally sure what this does
+#podAnnotations:
+  #iam.amazonaws.com/role: arn:aws:iam::813448775391:role/{{KEBAB_CASE_SOLUTION}}-kube2iam-intg

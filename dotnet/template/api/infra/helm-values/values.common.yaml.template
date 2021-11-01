@@ -1,0 +1,22 @@
+image:
+  repository: 813448775391.dkr.ecr.us-east-1.amazonaws.com/{{KEBAB_CASE_SOLUTION}}/{{KEBAB_CASE_PROJECT}}
+service:
+  internalPort: 80
+  healthcheck: /version
+  initialDelaySeconds: 60
+
+resources:
+  memory:
+    request: "128Mi"
+    limit: "256Mi"
+  cpu:
+    request: "100m"
+    limit: "250m"
+    
+autoscaling:
+  enabled: false
+
+secret:
+  NEW_RELIC_LICENSE_KEY: "#{NEW_RELIC_LICENSE_KEY}"
+  SENTRY__DSN: "#{SENTRY_DSN}"
+  SENTRY__RELEASE: "#{Octopus.Project.Name}@#{Octopus.Release.Number}"
