@@ -1,0 +1,27 @@
+
+{
+  "App_Name": "{{KEBAB_CASE_API_PROJECT}}",
+  "AWS": {
+    "Region": "us-east-1"
+  },
+  "AllowedHosts": "*",
+  "Sentry": {
+    "IncludeRequestPayload": true,
+    "SendDefaultPii": true,
+    "MinimumBreadcrumbLevel": "Information",
+    "MinimumEventLevel": "Error",
+    "AttachStackTrace": true,
+    "Debug": true,
+    "DiagnosticsLevel": "Error"
+  },
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Hangfire": "Information",
+        "Microsoft": "Warning",
+        "System": "Warning"
+      }
+    }
+  }
+}

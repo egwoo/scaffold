@@ -20,7 +20,7 @@ autoscaling:
 environment:
   DEPLOY_ENV: "prod"
   ASPNETCORE_ENVIRONMENT: "Production"
-  NEW_RELIC_APP_NAME: "{{KEBAB_CASE_PROJECT}}-prod"
+  NEW_RELIC_APP_NAME: "{{KEBAB_CASE_API_PROJECT}}-prod"
   SENTRY__RELEASE: "#{SENTRY_RELEASE}"
 
 #podAnnotations:

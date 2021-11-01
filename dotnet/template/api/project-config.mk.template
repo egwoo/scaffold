@@ -1,7 +1,7 @@
 # DO NOT REMOVE FILE
 # Add build-harness overrides here
 SOLUTION_NAME ?= {{KEBAB_CASE_SOLUTION}}
-PROJECT_NAME ?= {{KEBAB_CASE_PROJECT}}
+PROJECT_NAME ?= {{KEBAB_CASE_API_PROJECT}}
 
 DOCKER_PATH := ../../
 CHART_NAME := shipcharts/shipkube-worker

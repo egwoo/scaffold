@@ -8,7 +8,7 @@ ingress:
 environment:
   DEPLOY_ENV: "intg"
   ASPNETCORE_ENVIRONMENT: "Staging"
-  NEW_RELIC_APP_NAME: "{{KEBAB_CASE_PROJECT}}-intg"
+  NEW_RELIC_APP_NAME: "{{KEBAB_CASE_API_PROJECT}}-intg"
   SENTRY__RELEASE: "#{SENTRY_RELEASE}"
 
 #not totally sure what this does

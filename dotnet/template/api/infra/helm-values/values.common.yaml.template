@@ -1,5 +1,5 @@
 image:
-  repository: 813448775391.dkr.ecr.us-east-1.amazonaws.com/{{KEBAB_CASE_SOLUTION}}/{{KEBAB_CASE_PROJECT}}
+  repository: 813448775391.dkr.ecr.us-east-1.amazonaws.com/{{KEBAB_CASE_SOLUTION}}/{{KEBAB_CASE_API_PROJECT}}
 service:
   internalPort: 80
   healthcheck: /version

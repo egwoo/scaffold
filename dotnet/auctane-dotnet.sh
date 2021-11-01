@@ -34,6 +34,6 @@ cp -R ./template/infra/terraform/KEBAB_CASE_SOLUTION ${SOLUTION}/infra/terraform
 for f in $(find ./${SOLUTION} -iname "*.template")
 do
   echo "Processing $f"
-  sed -e "s/{{SOLUTION}}/${SOLUTION}/g" -e "s/{{KEBAB_CASE_SOLUTION}}/${KEBAB_CASE_SOLUTION}/g" -e "s/{{KEBAB_CASE_PROJECT}}/${KEBAB_CASE_API_PROJECT}/g" $f > ${f/\.template/ }
+  sed -e "s/{{SOLUTION}}/${SOLUTION}/g" -e "s/{{KEBAB_CASE_SOLUTION}}/${KEBAB_CASE_SOLUTION}/g" -e "s/{{KEBAB_CASE_API_PROJECT}}/${KEBAB_CASE_API_PROJECT}/g" $f > ${f/\.template/ }
   rm $f 
 done
