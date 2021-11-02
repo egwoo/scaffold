@@ -4,9 +4,10 @@ Copy `credentials_example.py` to `credentials.py` and populate the appropriate v
 ## Develop in docker
 ```
 docker build . -t scaffold
-docker run --rm -it -v $(pwd):/app --name scaffold scaffold sh
+docker run scaffold --name '{My Platform Service}'
 ```
-### In Docker (for now)
-```
-python3 octopus.py
-```
+
+If you need to clean up Octopus, these are the objects to clean up:
+- Project
+- Project Group
+- Library - Variable Sets

@@ -10,3 +10,8 @@ COPY requirements.txt /tmp/
 RUN pip install --requirement /tmp/requirements.txt
 
 WORKDIR /app
+
+COPY . .
+
+ENTRYPOINT [ "python3", "octopus.py" ]
+CMD []

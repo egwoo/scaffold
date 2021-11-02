@@ -7,7 +7,7 @@ import octopus_service_config
 
 
 parser = argparse.ArgumentParser(description='Add a service to Octopus')
-parser.add_argument('--name', help='Name of your service. Enclose in quotes if you have spaces')
+parser.add_argument('--name', help="Name of your service. Enclose in quotes if you have spaces. e.g., 'My Platform Service'", required=True)
 parser.add_argument('--space', help="Name of the space to add your service to. Defaults to 'Default'", default='Default')
 
 

@@ -1,18 +1,19 @@
 import credentials
-from dohq_teamcity import TeamCity, ApiException, NewProjectDescription
+import json
+import requests
 from pprint import pprint
 
 
 class TeamCityClient:
     def __init__(self, base_url, username, password):
-        self.tc = TeamCity(base_url, auth=(username, password))
-        self.tc.default_headers["Origin"] = credentials.teamcity_url
+        self.base_api_url = '{}/api'.format(base_url)
+        self.auth = (username, password)
+        self.headers = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            }
 
-    def create_new_project_from_existing(self):
-        body = NewProjectDescription(copy_all_associated_settings=True) # NewProjectDescription |  (optional)
-        body.name = 'Edwin Test'
-        body.source_project_locator = 'id:Services_DeliveryOptionsService'
-        try:
-            api_response = self.tc.project_api.create_project(body=body)
-        except ApiException as e:
-            print("Exception when calling ProjectApi->create_project: %s\n" % e)
+base_url = 'http://build.shipstation.com/app/rest'
+
+response = requests.get(f'{base_url}/projects', auth=(credentials.teamcity_username, credentials.teamcity_password), headers={'Content-Type': 'application/json', 'Accept': 'application/json'})
+projects = json.loads(response.text)
