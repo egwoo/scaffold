@@ -28,7 +28,7 @@ def steps(project_code):
         ]
         },
         {
-        "Name": "EKS Install Package {} webservice".format(project_code),
+        "Name": f"EKS Install Package {project_code} webservice",
         "PackageRequirement": "LetOctopusDecide",
         "Properties": {
             "Octopus.Action.TargetRoles": "kubernetes-eks"
@@ -37,7 +37,7 @@ def steps(project_code):
         "StartTrigger": "StartAfterPrevious",
         "Actions": [
             {
-            "Name": "EKS Install Package {} webservice".format(project_code),
+            "Name": f"EKS Install Package {project_code} webservice",
             "ActionType": "Octopus.HelmChartUpgrade",
             "Environments": [],
             "Channels": [],
@@ -54,7 +54,7 @@ def steps(project_code):
                 },
                 {
                 "Name": "ValuesPack-2",
-                "PackageId": "{}".format(project_code),
+                "PackageId": f"{project_code}",
                 "FeedId": "feeds-builtin",
                 "AcquisitionLocation": "ExecutionTarget",
                 "Properties": {
@@ -63,7 +63,7 @@ def steps(project_code):
                 },
                 {
                 "Name": "ValuesPack-3",
-                "PackageId": "{}".format(project_code),
+                "PackageId": f"{project_code}",
                 "FeedId": "feeds-builtin",
                 "AcquisitionLocation": "ExecutionTarget",
                 "Properties": {
@@ -75,8 +75,8 @@ def steps(project_code):
             "Properties": {
                 "Octopus.Action.Helm.ResetValues": "True",
                 "Octopus.Action.Helm.ClientVersion": "V3",
-                "Octopus.Action.Helm.ReleaseName": "{}-#{{HELM_ENVIRONMENT}}".format(project_code),
-                "Octopus.Action.Helm.Namespace": "{}-#{{HELM_ENVIRONMENT}}".format(project_code),
+                "Octopus.Action.Helm.ReleaseName": f"{project_code}-#{{HELM_ENVIRONMENT}}",
+                "Octopus.Action.Helm.Namespace": f"{project_code}-#{{HELM_ENVIRONMENT}}",
                 "Octopus.Action.Helm.AdditionalArgs": "--wait --create-namespace  --atomic --timeout 600s",
                 "Octopus.Action.Helm.CustomHelmExecutable": "d:\\tools\\helm\\3.2.4\\helm.exe",
                 "Octopus.Action.Package.PackageId": "shipkube-webservice",
@@ -129,7 +129,7 @@ variables = [
    },
    {
        'Name': 'SENTRY_DSN',
-       'Value': '{}'.format(credentials.sentry_dsn),
+       'Value': f'{credentials.sentry_dsn}',
        'Type': 'String',
        'IsSensitive': False,
    },
