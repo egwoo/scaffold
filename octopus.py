@@ -32,7 +32,7 @@ def add_service_to_octopus(service_name, space_name):
         project_group = octopus.create_project_group(space_id, service_name)
         logger.info(f"Project Group created: {project_group['Id']} successfully")
 
-        api_project_code = '{}-api'.format(service_code)
+        api_project_code = f'{service_code}-api'
         lifecycle = octopus.find_lifecycle('Stage-Production')
         project = octopus.create_project(space_id, api_project_code, '', project_group['Id'], lifecycle['Id'])
         octopus.set_deployment_process_steps(space_id, project['DeploymentProcessId'], octopus_service_config.steps(api_project_code))

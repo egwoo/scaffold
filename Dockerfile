@@ -13,5 +13,5 @@ WORKDIR /app
 
 COPY . .
 
-ENTRYPOINT [ "python3", "octopus.py" ]
-CMD []
+# ENTRYPOINT [ "python3", "octopus.py" ]
+# CMD []

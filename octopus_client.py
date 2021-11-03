@@ -4,7 +4,7 @@ import requests
 class OctopusClient:
     def __init__(self, base_url, api_key):
         # Define Octopus server variables
-        self.base_api_url = '{}/api'.format(base_url)
+        self.base_api_url = f'{base_url}/api'
         self.headers = {'X-Octopus-ApiKey': api_key}
 
     def _get_octopus_resource(self, uri, skip_count = 0):
@@ -43,7 +43,7 @@ class OctopusClient:
         return next((x for x in resources if x['Name'] == name), None)
 
     def find_space(self, name):
-        uri = '{}/spaces'.format(self.base_api_url)
+        uri = f'{self.base_api_url}/spaces'
         space = self._get_by_name(uri, name)
         return space
     
@@ -53,14 +53,14 @@ class OctopusClient:
             'Name': name,
             }
 
-        uri = '{0}/libraryvariablesets'.format(self.base_api_url)
+        uri = f'{self.base_api_url}/libraryvariablesets'
         response = requests.post(uri, headers=self.headers, json=library_set)
         response.raise_for_status()
         library_variable_set = json.loads(response.text)
         return library_variable_set
     
     def set_variable_set_variables(self, space_id, variable_set_id, variables):
-        uri = '{0}/{1}/variables/{2}'.format(self.base_api_url, space_id, variable_set_id)
+        uri = f'{self.base_api_url}/{space_id}/variables/{variable_set_id}'
         library_variable_set = self._get_octopus_resource(uri)
 
         library_variable_set['Variables'] = variables
@@ -73,7 +73,7 @@ class OctopusClient:
             'Name': name,
             }
 
-        uri = '{0}/projectgroups'.format(self.base_api_url)
+        uri = f'{self.base_api_url}/projectgroups'
         response = requests.post(uri, headers=self.headers, json=project_group)
         response.raise_for_status()
         project_group = json.loads(response.text)
@@ -87,25 +87,25 @@ class OctopusClient:
             'LifeCycleId': lifecycle_id
         }
 
-        uri = '{0}/{1}/projects'.format(self.base_api_url, space_id)
+        uri = f'{self.base_api_url}/{space_id}/projects'
         response = requests.post(uri, headers=self.headers, json=project)
         response.raise_for_status()
         return json.loads(response.text)
 
     def find_project_group(self, name):
-        uri = '{}/projectgroups'.format(self.base_api_url)
+        uri = f'{self.base_api_url}/projectgroups'
         return self._get_by_name(uri, name)
     
     def find_lifecycle(self, name):
-        uri = '{}/lifecycles'.format(self.base_api_url)
+        uri = f'{self.base_api_url}/lifecycles'
         return self._get_by_name(uri, name)
 
     def get_deployment_process(self, space_id, deployment_process_id):
-        uri = '{0}/{1}/deploymentprocesses/{2}'.format(self.base_api_url, space_id, deployment_process_id)
+        uri = f'{self.base_api_url}/{space_id}/deploymentprocesses/{deployment_process_id}'
         return self._get_octopus_resource(uri)
 
     def set_deployment_process_steps(self, space_id, deployment_process_id, steps):
-        uri = '{0}/{1}/deploymentprocesses/{2}'.format(self.base_api_url, space_id, deployment_process_id)
+        uri = f'{self.base_api_url}/{space_id}/deploymentprocesses/{deployment_process_id}'
         deployment_process = self._get_octopus_resource(uri)
 
         deployment_process['Steps'] = steps
@@ -124,7 +124,7 @@ class OctopusClient:
                     'Tag': '$^',
                     'ActionPackages': [
                         {
-                            'DeploymentAction': 'EKS Install Package {} webservice'.format(project_code),
+                            'DeploymentAction': f'EKS Install Package {project_code} webservice',
                             'PackageReference': ''
                         }
                     ],
@@ -132,16 +132,16 @@ class OctopusClient:
             ]
         }
 
-        uri = '{0}/{1}/channels'.format(self.base_api_url, space_id)
+        uri = f'{self.base_api_url}/{space_id}/channels'
         response = requests.post(uri, headers=self.headers, json=channel)
         response.raise_for_status()
 
     def get_project_channels(self, project_id):
-        uri = '{0}/projects/{1}/channels'.format(self.base_api_url, project_id)
+        uri = f'{self.base_api_url}/projects/{project_id}/channels'
         return self._get_octopus_resource(uri)
 
     def delete_channel(self, space_id, project_id, channel_id):
-        uri = '{0}/{1}/projects/{2}/channels/{3}'.format(self.base_api_url, space_id, project_id, channel_id)
+        uri = f'{self.base_api_url}/{space_id}/projects/{project_id}/channels/{channel_id}'
         headers = self.headers.copy()
         headers['x-http-method-override'] = 'DELETE'
         response = requests.post(uri, headers=headers)
