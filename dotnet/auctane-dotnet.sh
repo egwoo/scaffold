@@ -25,7 +25,7 @@ KEBAB_CASE_SOLUTION="$(echo ${SOLUTION} | sed 's/\([A-Z]\)/\-\1/g;s/^-//' | tr '
 KEBAB_CASE_API_PROJECT=${KEBAB_CASE_SOLUTION}-api
 
 # Copy api
-cp -R ./template/api/ ${API_PROJECT_PATH}
+cp -R ./template/api/. ${API_PROJECT_PATH}
 # Copy infra
 mkdir -p ${SOLUTION}/infra/terraform/
 cp -R ./template/infra/terraform/KEBAB_CASE_SOLUTION ${SOLUTION}/infra/terraform/${KEBAB_CASE_SOLUTION}
