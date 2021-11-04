@@ -1,7 +1,6 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1
 
-RUN apt-get update
-RUN apt-get install -y python3 python3-pip
+RUN apt-get update && apt-get install -y python3 python3-pip
 RUN pip3 install --upgrade pip
 
 COPY requirements.txt /tmp/
