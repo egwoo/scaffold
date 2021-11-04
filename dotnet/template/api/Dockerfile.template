@@ -19,7 +19,6 @@ WORKDIR /app
 
 COPY ./src/{{SOLUTION}}/ ./src/{{SOLUTION}}/src/{{SOLUTION}}/
 COPY ./src/{{SOLUTION}}.API/ ./src/{{SOLUTION}}/src/{{SOLUTION}}.API/
-COPY ./nuget.config* ./
 
 RUN dotnet restore "src/{{SOLUTION}}/src/{{SOLUTION}}.API/{{SOLUTION}}.API.csproj"
 
