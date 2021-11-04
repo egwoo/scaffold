@@ -62,7 +62,7 @@ def add_service_to_octopus(solution_name, space_name, sentry_dsn):
     logger.info(f"Connecting to Octopus on: {octopus.base_api_url} in Space: {space_name} SpaceID: {space_id}")
     
     library_variable_set = octopus.create_library_variable_set(space_id, solution_name_with_spaces)
-    octopus.set_variable_set_variables(space_id, library_variable_set['VariableSetId'], octopus_service_config.variables)
+    octopus.set_variable_set_variables(space_id, library_variable_set['VariableSetId'], octopus_service_config.get_variables(sentry_dsn, kebab_case_solution_name))
     logger.info(f"Library Variable Set created: {library_variable_set['Id']} successfully")
     
     project_group = octopus.create_project_group(space_id, solution_name_with_spaces)
@@ -71,7 +71,7 @@ def add_service_to_octopus(solution_name, space_name, sentry_dsn):
     kebab_case_api_project_name = f'{kebab_case_solution_name}-api'
     lifecycle = octopus.find_lifecycle('Stage-Production')
     project = octopus.create_project(space_id, kebab_case_api_project_name, '', project_group['Id'], lifecycle['Id'])
-    octopus.set_deployment_process_steps(space_id, project['DeploymentProcessId'], octopus_service_config.steps(kebab_case_api_project_name, sentry_dsn))
+    octopus.set_deployment_process_steps(space_id, project['DeploymentProcessId'], octopus_service_config.get_steps(kebab_case_api_project_name))
     for name in octopus_service_config.library_variable_set_names:
         id = octopus.find_library_variable_set(space_id, name)['Id']
         project['IncludedLibraryVariableSetIds'].append(id)

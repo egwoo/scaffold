@@ -1,6 +1,6 @@
 import credentials
 
-def steps(project_code):
+def get_steps(project_code):
     return [
         {
         "Name": "Health Check",
@@ -120,38 +120,39 @@ def steps(project_code):
         }
     ]
 
-variables = [
-   {
-       'Name': 'OctopusPrintEvaluatedVariables',
-       'Value': 'false',
-       'Type': 'String',
-       'IsSensitive': False,
-   },
-   {
-       'Name': 'SENTRY_DSN',
-       'Value': f'{credentials.sentry_dsn}',
-       'Type': 'String',
-       'IsSensitive': False,
-   },
-   {
-       'Name': 'SENTRY_PROJECTS',
-       'Value': 'platform-service-template',
-       'Type': 'String',
-       'IsSensitive': False,
-   },
-   {
-       'Name': 'SENTRY_RELEASE',
-       'Value': r'#{Octopus.Project.Name}@#{Octopus.Release.Number}',
-       'Type': 'String',
-       'IsSensitive': False,
-   },
-   {
-       'Name': 'SentryProjectPrefix',
-       'Value': r'#{Octopus.Project.Name}',
-       'Type': 'String',
-       'IsSensitive': False,
-   },
-]
+def get_variables(sentry_dsn, sentry_project_name): 
+    return [
+        {
+            'Name': 'OctopusPrintEvaluatedVariables',
+            'Value': 'false',
+            'Type': 'String',
+            'IsSensitive': False,
+        },
+        {
+            'Name': 'SENTRY_DSN',
+            'Value': f'{sentry_dsn}',
+            'Type': 'String',
+            'IsSensitive': False,
+        },
+        {
+            'Name': 'SENTRY_PROJECTS',
+            'Value': f'{sentry_project_name}',
+            'Type': 'String',
+            'IsSensitive': False,
+        },
+        {
+            'Name': 'SENTRY_RELEASE',
+            'Value': r'#{Octopus.Project.Name}@#{Octopus.Release.Number}',
+            'Type': 'String',
+            'IsSensitive': False,
+        },
+        {
+            'Name': 'SentryProjectPrefix',
+            'Value': r'#{Octopus.Project.Name}',
+            'Type': 'String',
+            'IsSensitive': False,
+        },
+    ]
 
 library_variable_set_names = [
     'Global',
