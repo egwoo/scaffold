@@ -68,6 +68,18 @@ class TeamCityClient:
     
     def detach_buildtype_from_templates(self, build_type_id):
         requests.delete(f'{tc.base_url}/buildTypes/{build_type_id}/templates?inlineSettings=true', auth=tc.auth, headers=tc.headers)
+        
+    def create_build(self, build_conf_id, branch):
+        payload = {
+                'branchName': branch,
+                'buildType': {
+                    'id': build_conf_id
+                }
+            }
+        
+        response = requests.post(f'{self.base_url}/buildQueue', auth=self.auth, headers=self.headers, json=payload)
+        response.raise_for_status()
+        return json.loads(response.text)
 
 try:
     projPathIdunno = 'Services/1234'
@@ -78,6 +90,9 @@ try:
     project = tc.create_project(project_name)
     build_type = tc.create_build_type(project_code, project['id'], teamcity_service_config.template_build_type_id, projPathIdunno)
     tc.detach_buildtype_from_templates(build_type['id'])
+    
+    #tc.create_build('Services_ConnectionManager_CmWebApi', 'refs/heads/connection-manager-ci-cd')
+    
 
 except requests.exceptions.HTTPError as err:
     logger.error(err, err.response.text)
