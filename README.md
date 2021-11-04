@@ -13,8 +13,7 @@ docker run --rm -it -v ${PWD}:/app --name scaffold scaffold sh
 Notes
 ```
 . dotnet/auctane-dotnet.sh PlatformServiceTemplate
-python3 teamcity.py --solution_name PlatformServiceTemplate
-python3 octopus.py --solution_name PlatformServiceTemplate
+python3 app.py --solution_name PlatformServiceTemplate
 ```
 
 ## Run script
