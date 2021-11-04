@@ -92,6 +92,12 @@ class OctopusClient:
         response.raise_for_status()
         return json.loads(response.text)
 
+    def update_project(self, space_id, project):
+        uri = f'{self.base_api_url}/{space_id}/projects/{project["Id"]}'
+        response = requests.put(uri, headers=self.headers, json=project)
+        response.raise_for_status
+
+
     def find_project_group(self, name):
         uri = f'{self.base_api_url}/projectgroups'
         return self._get_by_name(uri, name)
@@ -146,3 +152,7 @@ class OctopusClient:
         headers['x-http-method-override'] = 'DELETE'
         response = requests.post(uri, headers=headers)
         response.raise_for_status()
+
+    def find_library_variable_set(self, space_id, name):
+        uri = f'{self.base_api_url}/{space_id}/libraryvariablesets'
+        return self._get_by_name(uri, name)

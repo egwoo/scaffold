@@ -53,7 +53,7 @@ def steps(project_code):
                 }
                 },
                 {
-                "Name": "ValuesPack-2",
+                "Name": "ValuesPack-1",
                 "PackageId": f"{project_code}",
                 "FeedId": "feeds-builtin",
                 "AcquisitionLocation": "ExecutionTarget",
@@ -62,12 +62,12 @@ def steps(project_code):
                 }
                 },
                 {
-                "Name": "ValuesPack-3",
+                "Name": "ValuesPack-2",
                 "PackageId": f"{project_code}",
                 "FeedId": "feeds-builtin",
                 "AcquisitionLocation": "ExecutionTarget",
                 "Properties": {
-                    "ValuesFilePath": "values.#{{HELM_ENVIRONMENT}}.yaml"
+                    "ValuesFilePath": "values.#{HELM_ENVIRONMENT}.yaml"
                 }
                 }
             ],
@@ -151,4 +151,10 @@ variables = [
        'Type': 'String',
        'IsSensitive': False,
    },
+]
+
+library_variable_set_names = [
+    'Global',
+    'Kubernetes',
+    'New Relic',
 ]

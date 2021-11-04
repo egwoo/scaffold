@@ -44,6 +44,12 @@ def add_service_to_octopus(solution_name, space_name):
         lifecycle = octopus.find_lifecycle('Stage-Production')
         project = octopus.create_project(space_id, kebab_case_api_project_name, '', project_group['Id'], lifecycle['Id'])
         octopus.set_deployment_process_steps(space_id, project['DeploymentProcessId'], octopus_service_config.steps(kebab_case_api_project_name))
+        for name in octopus_service_config.library_variable_set_names:
+            id = octopus.find_library_variable_set(space_id, name)['Id']
+            project['IncludedLibraryVariableSetIds'].append(id)
+        project['IncludedLibraryVariableSetIds'].append(library_variable_set['Id'])
+        octopus.update_project(space_id, project)
+
         logger.info(f"Project created: {kebab_case_api_project_name} Id: {project['Id']} successfully")
 
         default_channel = next(iter(octopus.get_project_channels(project['Id'])),None)
