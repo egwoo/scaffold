@@ -4,7 +4,10 @@ Copy `credentials_example.py` to `credentials.py` and populate the appropriate v
 ## Develop in Docker
 ```
 docker build . -t scaffold
+# *nix
 docker run --rm -it -v $(pwd):/app --name scaffold scaffold sh
+# Powershell
+docker run --rm -it -v ${PWD}:/app --name scaffold scaffold sh
 ```
 
 ## Run script
