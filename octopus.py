@@ -1,7 +1,7 @@
 import credentials
 import argparse
+from utilities import camel_to_spaces
 import logging
-import re
 import requests
 
 from octopus_client import OctopusClient
@@ -18,12 +18,6 @@ logging.basicConfig(
     level=logging.INFO,
 )
 logger = logging.getLogger(__name__)
-
-def camel_to_kebab(name):
-  name = re.sub('(.)([A-Z][a-z]+)', r'\1-\2', name)
-  name = re.sub('([a-z0-9])([A-Z])', r'\1-\2', name).lower()
-  name = re.sub('\.', '-', name)
-  return name
 
 def add_service_to_octopus(solution_name, space_name):
     kebab_case_solution_name = solution_name.replace(' ', '-').lower()
@@ -54,9 +48,9 @@ def add_service_to_octopus(solution_name, space_name):
 
         default_channel = next(iter(octopus.get_project_channels(project['Id'])),None)
 
-        api_lifecycle = octopus.find_lifecycle('Integration')
-        octopus.create_channel(space_id, project['Id'], api_lifecycle['Id'], kebab_case_api_project_name, 'Integration', True)
-        octopus.create_channel(space_id, project['Id'], lifecycle['Id'], kebab_case_api_project_name, 'Production', False)
+        intg_lifecycle = octopus.find_lifecycle('Integration')
+        octopus.create_channel(space_id, project['Id'], intg_lifecycle['Id'], kebab_case_api_project_name, 'Integration', 'intg', True)
+        octopus.create_channel(space_id, project['Id'], lifecycle['Id'], kebab_case_api_project_name, 'Production', '$^', False)
         octopus.delete_channel(default_channel['SpaceId'], default_channel['ProjectId'], default_channel['Id'])
         logger.info(f"Channels created successfully")
         logger.info(f"'{solution_name}' | {kebab_case_solution_name} added to Octopus successfully")
@@ -68,5 +62,5 @@ def add_service_to_octopus(solution_name, space_name):
 
 if __name__ == "__main__":
     args = parser.parse_args()
-    solution_name_with_spaces = re.sub(r'(?<!^)(?=[A-Z])', ' ', args.solution_name)
+    solution_name_with_spaces = camel_to_spaces(args.solution_name)
     add_service_to_octopus(solution_name_with_spaces, args.space)

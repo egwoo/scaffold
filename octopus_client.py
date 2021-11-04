@@ -118,7 +118,7 @@ class OctopusClient:
         response = requests.put(uri, headers=self.headers, json=deployment_process)
         response.raise_for_status()
 
-    def create_channel(self, space_id, project_id, lifecycle_id, project_code, name, is_default):
+    def create_channel(self, space_id, project_id, lifecycle_id, project_code, name, prerelease_tag, is_default):
         channel = {
             'ProjectId': project_id,
             'Name': name,
@@ -127,7 +127,7 @@ class OctopusClient:
             'LifeCycleId': lifecycle_id,
             'Rules': [
                 {
-                    'Tag': '$^',
+                    'Tag': prerelease_tag,
                     'ActionPackages': [
                         {
                             'DeploymentAction': f'EKS Install Package {project_code} webservice',

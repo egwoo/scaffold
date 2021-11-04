@@ -6,4 +6,4 @@ teamcity_password = '{TeamCity Password}'
 octopus_url = 'https://octoprod.sslocal.com'
 octopus_apikey = '{Octopus API Key}'
 
-sentry_dsn = '{Sentry DSN}'
+sentry_token = 'Get the token here - https://sentry.io/settings/shipstation/developer-settings'

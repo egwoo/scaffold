@@ -1,7 +1,7 @@
 import credentials
 import argparse
+from utilities import camel_to_kebab, camel_to_spaces
 import logging
-import re
 import requests
 
 from teamcity_client import TeamCityClient
@@ -19,15 +19,10 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-def camel_to_kebab(name):
-  name = re.sub('(.)([A-Z][a-z]+)', r'\1-\2', name)
-  name = re.sub('([a-z0-9])([A-Z])', r'\1-\2', name).lower()
-  name = re.sub('\.', '-', name)
-  return name
 
 def add_service_to_teamcity(solution_name):
     try:
-        solution_name_with_spaces = re.sub(r'(?<!^)(?=[A-Z])', ' ', solution_name)
+        solution_name_with_spaces = camel_to_spaces(solution_name)
         api_project_name = f'{solution_name}.API'
         api_project_path = f'Services/{solution_name}/src/{api_project_name}'
         kebab_case_api_project_name = camel_to_kebab(api_project_name)
