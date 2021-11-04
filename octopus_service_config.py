@@ -1,5 +1,3 @@
-import credentials
-
 def get_steps(project_code):
     return [
         {
