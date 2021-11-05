@@ -17,9 +17,12 @@ This set of scripts will create the following:
 Copy `credentials_example.py` to `credentials.py` and populate the appropriate values.
 
 ## Usage
+For now, invoke this script in Docker.
+The C# Solution will be created wherever you specify `{PATH_TO_C#_SERVICE}`
+`{SERVICE_NAME}` should be in Pascal Case and will be the name of the created solution.
 ```
 docker build . -t scaffold
-docker run -v ${PATH_TO_C#_SERVICE}:/target scaffold {SERVICE_NAME}
+docker run -v {PATH_TO_C#_SERVICE}:/target scaffold {SERVICE_NAME}
 ```
 
 ## As of 11/5, if you need to clean up CI/CD artifacts from testing, here are the current items to clean up:
