@@ -1,9 +1,9 @@
 # Overview
-This set of scripts should allow you to scaffold a C# Platform Service with one command and deploy a dev Hello World instance in minutes.
+This set of scripts should allow you to scaffold a .NET C# Core Platform Service with one command and deploy a dev Hello World instance in minutes.
 
 This is a highly opinionated script that relies on the following conventions:
-* Your C# API Solution is in the [Services folder of the ShipStation Repo](https://github.com/shipstation/shipstation/tree/master/Services)
-* Your C# API Solution Name is in Pascal Case
+* Your Solution is in the [Services folder of the ShipStation Repo](https://github.com/shipstation/shipstation/tree/master/Services)
+* Your Solution Name is in Pascal Case
     * Your API Project will be {Solution Name}.API
 * Project Names created in the various systems follow prior precedents which is a mix of Pascal Case, Kebab Case, and Title Case.
 
@@ -13,16 +13,19 @@ This set of scripts will create the following:
 * Sentry Project
 * Octopus Project, Variable Sets, and Channels
 
-# Development
-Copy `credentials_example.py` to `credentials.py` and populate the appropriate values.
-
 ## Usage
+Copy `cicd/credentials_example.py` to `cicd/credentials.py` and populate the appropriate values.
+
 For now, invoke this script in Docker.
 The C# Solution will be created wherever you specify `{PATH_TO_C#_SERVICE}`
 `{SERVICE_NAME}` should be in Pascal Case and will be the name of the created solution.
 ```
 docker build . -t scaffold
 docker run -v {PATH_TO_C#_SERVICE}:/target scaffold {SERVICE_NAME}
+```
+e.g.
+```
+docker run -v ~/source/shipstation/shipstation/Services:/target scaffold MyPlatformService
 ```
 
 ## As of 11/5, if you need to clean up CI/CD artifacts from testing, here are the current items to clean up:
