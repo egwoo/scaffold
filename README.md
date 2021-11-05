@@ -48,3 +48,4 @@ docker run -v ${PATH_TO_C#_SERVICE}:/target scaffold {SERVICE_NAME}
 
 ### Other
 * Add support for Dynamo and Postgres
+* Automatically create a solution in a GitHub branch, build and deploy to intg and provide a link to the new service?
