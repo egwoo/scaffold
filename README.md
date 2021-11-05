@@ -1,7 +1,7 @@
 # Development
 Copy `credentials_example.py` to `credentials.py` and populate the appropriate values.
 
-## Run
+## Usage
 ```
 docker build . -t scaffold
 docker run -v ${PATH_TO_C#_SERVICE}:/target scaffold {SERVICE_NAME}
