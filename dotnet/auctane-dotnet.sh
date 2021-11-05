@@ -5,6 +5,7 @@ if [[ $# -eq 0 ]] ; then
     exit 1
 fi
 WORKING_DIR=$(pwd)
+TARGET="/target"
 SCRIPT_PATH=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 cd "${SCRIPT_PATH}"
 
@@ -41,5 +42,6 @@ do
   rm $f 
 done
 
+mkdir -p "${TARGET}"
+mv "${SCRIPT_PATH}/${SOLUTION}" "${TARGET}"
 cd "${WORKING_DIR}"
-mv "${SCRIPT_PATH}/${SOLUTION}" .
