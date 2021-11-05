@@ -4,6 +4,7 @@ import requests
 class OctopusClient:
     def __init__(self, base_url, api_key):
         # Define Octopus server variables
+        self.base_url = base_url
         self.base_api_url = f'{base_url}/api'
         self.headers = {'X-Octopus-ApiKey': api_key}
 

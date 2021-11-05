@@ -3,7 +3,8 @@ import requests
 
 class TeamCityClient:
     def __init__(self, base_url, username, password):
-        self.base_url = f'{base_url}/app/rest'
+        self.base_url = base_url
+        self.base_api_url = f'{base_url}/app/rest'
         self.auth = (username, password)
         self.headers = {
             'Content-Type': 'application/json',
@@ -17,7 +18,7 @@ class TeamCityClient:
                 'locator': 'id:Services'
             }
         }
-        response = requests.post(f'{self.base_url}/projects', auth=self.auth, headers=self.headers, json=payload)
+        response = requests.post(f'{self.base_api_url}/projects', auth=self.auth, headers=self.headers, json=payload)
         response.raise_for_status()
         return json.loads(response.text)
 
@@ -51,12 +52,12 @@ class TeamCityClient:
                 }
             }
 
-        response = requests.post(f'{self.base_url}/buildTypes', auth=self.auth, headers=self.headers, json=payload)
+        response = requests.post(f'{self.base_api_url}/buildTypes', auth=self.auth, headers=self.headers, json=payload)
         response.raise_for_status()
         return json.loads(response.text)
     
     def detach_buildtype_from_templates(self, build_type_id):
-        requests.delete(f'{self.base_url}/buildTypes/{build_type_id}/templates?inlineSettings=true', auth=self.auth, headers=self.headers)
+        requests.delete(f'{self.base_api_url}/buildTypes/{build_type_id}/templates?inlineSettings=true', auth=self.auth, headers=self.headers)
         
     def create_build(self, build_conf_id, branch):
         payload = {
@@ -66,6 +67,6 @@ class TeamCityClient:
                 }
             }
         
-        response = requests.post(f'{self.base_url}/buildQueue', auth=self.auth, headers=self.headers, json=payload)
+        response = requests.post(f'{self.base_api_url}/buildQueue', auth=self.auth, headers=self.headers, json=payload)
         response.raise_for_status()
         return json.loads(response.text)
